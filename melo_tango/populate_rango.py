@@ -8,7 +8,7 @@ from rango.models import Category, Page
 
 
 def populate():
-    python_cat = add_cat('Python')
+    python_cat = add_cat(name="bbs",views=20,likes=20)
 
     add_page(cat=python_cat,
         title="Official Python Tutorial",
@@ -22,7 +22,7 @@ def populate():
         title="Learn Python in 10 Minutes",
         url="http://www.korokithakis.net/tutorials/python/")
 
-    django_cat = add_cat("Django")
+    django_cat = add_cat(name="game",views=25,likes=26)
 
     add_page(cat=django_cat,
         title="Official Django Tutorial",
@@ -36,7 +36,8 @@ def populate():
         title="How to Tango with Django",
         url="http://www.tangowithdjango.com/")
 
-    NBA_cat = add_cat("NBA")
+
+    NBA_cat = add_cat(name="sport",views=40,likes=38)
 
     add_page(cat=NBA_cat,
         title="qq NBA",
@@ -51,12 +52,22 @@ def populate():
         for p in Page.objects.filter(category=c):
             print "- {0} - {1}".format(str(c), str(p))
 
+    change_cat(name="Python",views=10,likes=10)
+
+    change_cat(name="Django",views=15,likes=10)
+
+    change_cat(name="NBA",views=40,likes=20)
+
 def add_page(cat, title, url, views=0):
     p = Page.objects.get_or_create(category=cat, title=title, url=url, views=views)[0]
     return p
 
-def add_cat(name):
-    c = Category.objects.get_or_create(name=name)[0]
+def add_cat(name,views,likes):
+    c = Category.objects.get_or_create(name=name,views=views,likes=likes)[0]
+    return c
+
+def change_cat(name,views,likes):
+    c = Category.objects.get(name=name,views=views,likes=likes)[0]
     return c
 
 # Start execution here!

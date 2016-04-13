@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from ragno.models import Category
+
 def index(request):
 	context_dict = { 'boldmessage': "viva la vida"}
 	return render(request,'rango/index.html',context_dict)
