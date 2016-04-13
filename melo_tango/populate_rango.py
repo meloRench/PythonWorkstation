@@ -52,11 +52,7 @@ def populate():
         for p in Page.objects.filter(category=c):
             print "- {0} - {1}".format(str(c), str(p))
 
-    change_cat(name="Python",views=10,likes=10)
 
-    change_cat(name="Django",views=15,likes=10)
-
-    change_cat(name="NBA",views=40,likes=20)
 
 def add_page(cat, title, url, views=0):
     p = Page.objects.get_or_create(category=cat, title=title, url=url, views=views)[0]
@@ -66,9 +62,6 @@ def add_cat(name,views,likes):
     c = Category.objects.get_or_create(name=name,views=views,likes=likes)[0]
     return c
 
-def change_cat(name,views,likes):
-    c = Category.objects.get(name=name,views=views,likes=likes)[0]
-    return c
 
 # Start execution here!
 if __name__ == '__main__':

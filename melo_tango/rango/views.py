@@ -1,10 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from ragno.models import Category
+from rango.models import Category
 
 def index(request):
-	context_dict = { 'boldmessage': "viva la vida"}
+	Category_list = Category.objects.order_by('-views')[:5]
+
+	context_dict = { 'boldmessage': "viva la vida",
+	                          'categories':Category_list}
+
+
 	return render(request,'rango/index.html',context_dict)
    # return HttpResponse("Rango says hey there world! <br/> <a href='/rango/rc'>About</a>")
 
