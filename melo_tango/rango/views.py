@@ -14,7 +14,7 @@ def index(request):
 	return render(request,'rango/index.html',context_dict)
    # return HttpResponse("Rango says hey there world! <br/> <a href='/rango/rc'>About</a>")
 
-def category(request):
+def category(request,category_name_slug):
 	context_dict = {}
 
 	try:

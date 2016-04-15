@@ -7,14 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('rango', '0002_auto_20160413_1441'),
+        ('rango', '0003_category_slug'),
     ]
 
     operations = [
-        migrations.AddField(
+        migrations.AlterField(
             model_name='category',
             name='slug',
-            field=models.SlugField(null=True, blank=True),
-            preserve_default=False,
+            field=models.SlugField(unique=True),
         ),
     ]
