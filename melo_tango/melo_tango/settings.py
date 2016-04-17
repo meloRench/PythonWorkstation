@@ -19,7 +19,7 @@ TEMPLATE_DIRS = [
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     TEMPLATE_PATH,
-]
+] 
 
 STATIC_PATH = os.path.join(BASE_DIR,'static')
 
@@ -50,8 +50,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
+    'django.contrib.auth', #为Django提供访问认证系统
+    'django.contrib.contenttypes',#可以通过认证的应用程序来跟踪安装的数据库模型
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
