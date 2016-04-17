@@ -50,8 +50,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'django.contrib.admin',
-    'django.contrib.auth', #为Django提供访问认证系统
-    'django.contrib.contenttypes',#可以通过认证的应用程序来跟踪安装的数据库模型
+    'django.contrib.auth', 
+    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',

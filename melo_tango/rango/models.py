@@ -32,5 +32,5 @@ class UserProfile(models.Model):
      	website = models.URLField(blank=True)
      	picture = models.ImageField(upload_to='profile_images', blank=True)
 
-     def __unicode__(self):
-         	return self.user.username		
+ 	def __unicode__(self):
+		return self.user.username		
