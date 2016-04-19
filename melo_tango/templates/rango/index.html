@@ -11,7 +11,7 @@
 
     <body>
         <h1>自由引导人民</h1>
-
+        
         {% if categories %}
         	<ul>
         		{%  for category in categories %}
@@ -26,7 +26,14 @@
         <a href="/rango/add_category/">Add a New Category</a><br />
         <a href="/rango/about/">About</a><br />
         <a href="/rango/register/">Register</a><br />
+        <a href="/rango/login/">Login</a>
 
+
+        {% if user.is_authenticated %}
+        <h1>Rango says... hello {{ user.username }}!</h1>
+        {% else %}
+        <h1>Rango says... hello world!</h1>
+        {% endif %}
          <strong>{{ boldmessage }}</strong><br />
 
         <img src="{% static "images/vivalavida.jpg" %}" alt="Viva La Vida" width="400" height="316">
