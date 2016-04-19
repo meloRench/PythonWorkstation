@@ -3,9 +3,14 @@ from django.http import HttpResponse
 from rango.forms import CategoryForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.decorators import login_required
 
 from rango.models import Category
 from rango.models import Page
+
+@login_required
+def restricted(request):
+    return HttpResponse("Since you're logged in, you can see this text!")
 
 def index(request):
 	Category_list = Category.objects.order_by('-views')[:5]
@@ -127,5 +132,18 @@ def user_login(request):
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
         return render(request, 'rango/login.html', {})
+
+
+from django.contrib.auth import logout
+
+# Use the login_required() decorator to ensure only those logged in can access the view.
+@login_required
+def user_logout(request):
+    # Since we know the user is logged in, we can now just log them out.
+    logout(request)
+
+    # Take the user back to the homepage.
+    return HttpResponseRedirect('/rango/')
+
 def  about(request):
 	return HttpResponse("about Page!<br/> <a href='/rango/'>Index</a>")
