@@ -13,6 +13,7 @@ def restricted(request):
     return HttpResponse("Since you're logged in, you can see this text!")
 
 def index(request):
+             request.session.set_test_cookie()
 	Category_list = Category.objects.order_by('-views')[:5]
 
 	context_dict = { 'boldmessage': "viva la vida",
@@ -55,6 +56,10 @@ def add_category(request):
 from rango.forms import UserForm, UserProfileForm
 
 def register(request):
+
+    if request.session.test_cookie_worked():
+    print ">>>> TEST COOKIE WORKED!"
+    request.session.delete_test_cookie()
 
     registered = False
 
