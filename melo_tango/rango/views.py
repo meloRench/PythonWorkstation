@@ -4,7 +4,7 @@ from rango.forms import CategoryForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
-
+from datetime import datetime
 from rango.models import Category
 from rango.models import Page
 
@@ -13,15 +13,45 @@ def restricted(request):
     return HttpResponse("Since you're logged in, you can see this text!")
 
 def index(request):
-             request.session.set_test_cookie()
-	Category_list = Category.objects.order_by('-views')[:5]
+    category_list = Category.objects.all()
+    page_list = Page.objects.order_by('-views')[:5]
+    context_dict = {'categories': category_list, 'pages': page_list}
 
-	context_dict = { 'boldmessage': "viva la vida",
-	                          'categories':Category_list}
+    visits = int(request.COOKIES.get('visits', '1'))
+
+    reset_last_visit_time = False
+    response = render(request, 'rango/index.html', context_dict)
+    
+    if 'last_visit' in request.COOKIES:
+       
+        last_visit = request.COOKIES['last_visit']
+        
+        last_visit_time = datetime.strptime(last_visit[:-7], "%Y-%m-%d %H:%M:%S")
+
+        
+        if (datetime.now() - last_visit_time).days > 0:
+            visits = visits + 1
+            
+            reset_last_visit_time = True
+    else:
+       
+        reset_last_visit_time = True
+
+        context_dict['visits'] = visits
+        context_dict = { 'boldmessage': "viva la vida",
+                              'categories':category_list}
+# Category_list = Category.objects.order_by('-views')[:5]
 
 
-	return render(request,'rango/index.html',context_dict)
-   # return HttpResponse("Rango says hey there world! <br/> <a href='/rango/rc'>About</a>")
+        
+        response = render(request, 'rango/index.html', context_dict)
+
+    if reset_last_visit_time:
+        response.set_cookie('last_visit', datetime.now())
+        response.set_cookie('visits', visits)
+
+    
+    return response
 
 def category(request,category_name_slug):
 	context_dict = {}
@@ -57,10 +87,7 @@ from rango.forms import UserForm, UserProfileForm
 
 def register(request):
 
-    if request.session.test_cookie_worked():
-    print ">>>> TEST COOKIE WORKED!"
-    request.session.delete_test_cookie()
-
+    
     registered = False
 
     if request.method == 'POST':
