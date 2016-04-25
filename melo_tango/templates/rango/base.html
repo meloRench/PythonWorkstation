@@ -32,11 +32,11 @@
         <ul>
     {% if user.is_authenticated %}
         <li><a href="{% url 'restricted' %}">Restricted Page</a></li>
-        <li><a href="{% url 'logout' %}">Logout</a></li>
-        <li><a href="{% url 'add_category' %}">Add a New Category</a></li>
+        <li><a href="{% url 'auth_logout' %}?next=/rango/">注销</a></li>
+        <li><a href="{% url 'add_category' %}">增加标签</a></li>
     {% else %}
-        <li><a href="{% url 'register' %}">Register Here</a></li>
-        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'registration_register' %}">注册</a></li>
+        <li><a href="{% url 'auth_login' %}">登录</a></li>
     {% endif %}
 
     <li><a href="{% url 'about' %}">About</a></li>

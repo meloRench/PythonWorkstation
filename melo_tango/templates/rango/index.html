@@ -1,7 +1,41 @@
+{% extends 'rango/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}{{ category_name }}{% endblock %}
+
+{% block body_block %}
+ <body>
+        <h1>自由引导人民</h1>
+        
+        {% if categories %}
+            <ul>
+                {%  for category in categories %}
+                
+                <li><a href="/rango/category/{{ category.slug }}" >{{ category.name }}</a></li>
+                {%  endfor %}
+            </ul>
+        {%  else %}
+            <strong> 无法显示，出错了</strong>
+        {% endif %}
+
+        
+
+
+        {% if user.is_authenticated %}
+        <h1>Rango says... hello {{ user.username }}!</h1>
+        {% else %}
+        <h1>Rango says... hello world!</h1>
+        {% endif %}
+         <strong>{{ boldmessage }}</strong><br />
+
+        <img src="{% static "images/vivalavida.jpg" %}" alt="Viva La Vida" width="400" height="316">
+
+{% endblock %}
+<!-- 
 <!DOCTYPE html>
 
 {% load staticfiles %}
-<!--使用{% load static %}标签来使用静态媒体.所以我们才可以用  {% static "**.jpg" %}  在模板里调用static文件-->
 
 <html>
 
@@ -15,7 +49,7 @@
         {% if categories %}
         	<ul>
         		{%  for category in categories %}
-        		<!--<li>{{  category.name }}</li>-->
+        		
         		<li><a href="/rango/category/{{ category.slug }}" >{{ category.name }}</a></li>
         		{%  endfor %}
         	</ul>
@@ -45,4 +79,4 @@
         <img src="{% static "images/vivalavida.jpg" %}" alt="Viva La Vida" width="400" height="316">
     </body>
 
-</html>
+</html> -->
