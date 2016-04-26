@@ -1,0 +1,17 @@
+{% extends 'rango/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}About{% endblock %}
+
+{% block body_block %}
+    <div class="page-header">
+                <h1>About</h1>
+            </div>
+            <div>
+            <p></strong>.</p>
+
+           <strong>{{ boldmessage }}</strong><br />        
+           <img src="{% static "images/vivalavida.jpg" %}" alt="Viva La Vida" width="400" height="316">
+            </div>
+{% endblock %}

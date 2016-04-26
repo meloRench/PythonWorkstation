@@ -40,16 +40,9 @@ def index(request):
         request.session['visits'] = visits
     context_dict['visits'] = visits
 
-    context_dict = { 'boldmessage': "viva la vida",
-                              'categories':category_list}
-# Category_list = Category.objects.order_by('-views')[:5]
-
-
-        
+            
     response = render(request, 'rango/index.html', context_dict)
 
-    
-    
     return response
 
 def category(request,category_name_slug):
@@ -177,4 +170,6 @@ def user_logout(request):
     return HttpResponseRedirect('/rango/')
 
 def  about(request):
-	return HttpResponse("about Page!<br/> <a href='/rango/'>Index</a>")
+
+    context_dict = { 'boldmessage': "viva la vida",}
+    return render(request, 'rango/about.html', context_dict)
